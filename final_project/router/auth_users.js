@@ -27,8 +27,8 @@ regd_users.post("/login", (req,res) => {
 
   if (authenticatedUser(username, password)) {
     // create JWT token
-    const token = jwt.sign({username: username}, "secretkey", {expiresIn: "1h"});
-    req.session.authorization = {token, username};
+    const token = jwt.sign({username: username}, "access", {expiresIn: "1h"});
+    req.session.authorization = {accessToken: token, username};
     return res.status(200).json({message: "Login successfull", token});
   } else {
     return res.status(401).json({message: "Invalid credentials"});
